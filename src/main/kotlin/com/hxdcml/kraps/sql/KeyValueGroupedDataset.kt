@@ -1,6 +1,5 @@
-package com.hxdcml.kraps.sql.dataset
+package com.hxdcml.kraps.sql
 
-import org.apache.spark.api.java.function.FlatMapGroupsFunction
 import org.apache.spark.sql.Dataset
 import org.apache.spark.sql.Encoder
 import org.apache.spark.sql.Encoders
@@ -16,12 +15,6 @@ object KeyValueGroupedDataset {
             encoder: Encoder<R> = Encoders.bean(R::class.java),
             crossinline body: (K, Iterator<V>) -> Iterable<R>
     ): Dataset<R> {
-        return this.flatMapGroups(internalFlatMapGroupsHelper(body), encoder)
-    }
-
-    inline fun <K, V, R> internalFlatMapGroupsHelper(
-            crossinline body: (K, Iterator<V>) -> Iterable<R>
-    ): FlatMapGroupsFunction<K, V, R> {
-        return FlatMapGroupsFunction { key, values -> body(key, values).iterator() }
+        return this.flatMapGroups({ key, values -> body(key, values).iterator() }, encoder)
     }
 }

@@ -1,14 +1,19 @@
-package com.hxdcml.kraps.sql.dataset
+package com.hxdcml.kraps.sql
 
 import com.holdenkarau.spark.testing.JavaDatasetSuiteBase
 import com.hxdcml.kraps.compatibility.tuple.KPair
 import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component1
 import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component2
 import com.hxdcml.kraps.objects.*
+import com.hxdcml.kraps.sql.Dataset.map
+import com.hxdcml.kraps.sql.Dataset.flatMap
+import com.hxdcml.kraps.sql.Dataset.smartAs
+import com.hxdcml.kraps.sql.Dataset.groupByKey
+import com.hxdcml.kraps.sql.Dataset.mapPartitions
 import org.amshove.kluent.shouldContainAll
-import org.amshove.kluent.shouldEqual
 import org.apache.spark.sql.Encoders
 import org.junit.Test
+import org.amshove.kluent.shouldEqual
 
 /**
  * Author: Soul
