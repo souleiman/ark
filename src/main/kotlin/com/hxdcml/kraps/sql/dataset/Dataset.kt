@@ -10,9 +10,8 @@ import org.apache.spark.sql.KeyValueGroupedDataset
  * Date: 3/1/2018
  */
 
-
-inline fun <T, reified R> Dataset<T>.smartAs(): Dataset<R> {
-    return this.`as`(Encoders.bean(R::class.java))
+inline fun <T, reified R> Dataset<T>.smartAs(encoder: Encoder<R> = Encoders.bean(R::class.java)): Dataset<R> {
+    return this.`as`(encoder)
 }
 
 inline fun <T, reified R> Dataset<T>.map(
