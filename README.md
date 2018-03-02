@@ -1,6 +1,7 @@
 # __K-raps__
 
-[![build status](https://travis-ci.org/souleiman/k-raps.svg?branch=master)](https://travis-ci.org/souleiman/k-raps)
+[![travis-ci](https://travis-ci.org/souleiman/k-raps.svg?branch=master)](https://travis-ci.org/souleiman/k-raps)
+[![codecov](http://codecov.io/github/souleiman/k-raps/coverage.svg?branch=master)](http://codecov.io/github/souleiman/k-raps/?branch=master)
 
 K-raps, Spark backwards for Kotlin, why? Spark supports Java API which allows us to use Spark with Kotlin, 
 but that comes with caveats. Implementation with Spark Dataset (or Dataframe) with Java is asinine and the goal of 
