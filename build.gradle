@@ -6,6 +6,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$detekt_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
     }
 }
 
@@ -15,7 +16,7 @@ version '0.0.1'
 apply plugin: 'kotlin'
 apply plugin: 'idea'
 apply plugin: 'io.gitlab.arturbosch.detekt'
-
+apply plugin: 'org.jetbrains.dokka'
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.5.1'
@@ -23,6 +24,7 @@ task wrapper(type: Wrapper) {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     jcenter()
 }
@@ -48,4 +50,16 @@ detekt {
         filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
         baseline = "$projectDir/reports/baseline.xml"
     }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
 }
