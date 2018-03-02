@@ -1,6 +1,8 @@
 package com.hxdcml.kraps.compatibility.tuple
 
 import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.toPair
+import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component1
+import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component2
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
 import org.junit.Before
@@ -64,5 +66,16 @@ class KPairTest {
 
         pair.second shouldBeInstanceOf Int::class
         pair.second shouldEqual -1
+    }
+
+    @Test
+    fun hookComponents() {
+        val (first, second) = Tuple2<String, Int>("Negative One", -1)
+
+        first shouldBeInstanceOf String::class
+        first shouldEqual "Negative One"
+
+        second shouldBeInstanceOf Int::class
+        second shouldEqual -1
     }
 }

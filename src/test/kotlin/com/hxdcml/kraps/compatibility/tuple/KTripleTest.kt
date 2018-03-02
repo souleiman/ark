@@ -1,5 +1,8 @@
 package com.hxdcml.kraps.compatibility.tuple
 
+import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.component1
+import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.component2
+import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.component3
 import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.toTriple
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
@@ -83,5 +86,19 @@ class KTripleTest {
 
         triple.third shouldBeInstanceOf Double::class
         triple.third shouldEqual -.9999999999
+    }
+
+    @Test
+    fun hookComponents() {
+        val (first, second, third) = Tuple3<String, Int, Double>("Negative One", -1, -.9999999999)
+
+        first shouldBeInstanceOf String::class
+        first shouldEqual "Negative One"
+
+        second shouldBeInstanceOf Int::class
+        second shouldEqual -1
+
+        third shouldBeInstanceOf Double::class
+        third shouldEqual -.9999999999
     }
 }
