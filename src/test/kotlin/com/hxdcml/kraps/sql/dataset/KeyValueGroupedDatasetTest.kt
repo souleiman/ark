@@ -50,4 +50,18 @@ class KeyValueGroupedDatasetTest : JavaDatasetSuiteBase() {
 
         result shouldContainAll setOf(Field(value = "CAX"), Field(value = "BA"), Field(value = "AC"))
     }
+
+    @Test
+    fun flatMapHelper() {
+        val flat = KeyValueGroupedDataset.internalFlatMapGroupsHelper<String, Int, Int> { k, iterator ->
+            iterator.asSequence().filter { it % 2 == 0 }.toMutableList()
+                    .apply { if (k.length % 2 == 0) add(k.length) }
+        }
+
+        val result = flat.call("1234", listOf(1, 2, 3, 4, 5, 6, 7, 8, 9).iterator())
+                .asSequence()
+                .toList()
+
+        result shouldContainAll setOf(2, 4, 6, 8, 4)
+    }
 }
