@@ -6,6 +6,8 @@ import org.amshove.kluent.shouldContainAll
 import org.apache.spark.sql.Encoders
 import org.junit.Test
 
+import com.hxdcml.kraps.sql.dataset.KeyValueGroupedDataset.flatMapGroups
+
 /**
  * Author: Soul
  * Date: 3/2/2018
