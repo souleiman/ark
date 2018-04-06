@@ -1,9 +1,9 @@
-package com.hxdcml.kraps.compatibility.tuple
+package com.hxdcml.ark.compatibility.tuple
 
-import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.component1
-import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.component2
-import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.component3
-import com.hxdcml.kraps.compatibility.tuple.KTriple.Hook.toTriple
+import com.hxdcml.ark.compatibility.tuple.KTriple.Hook.component1
+import com.hxdcml.ark.compatibility.tuple.KTriple.Hook.component2
+import com.hxdcml.ark.compatibility.tuple.KTriple.Hook.component3
+import com.hxdcml.ark.compatibility.tuple.KTriple.Hook.toTriple
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
 import org.junit.Test

@@ -1,4 +1,4 @@
-package com.hxdcml.kraps.compatibility.tuple
+package com.hxdcml.ark.compatibility.tuple
 
 import scala.Tuple2
 

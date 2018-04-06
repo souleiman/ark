@@ -1,14 +1,13 @@
-package com.hxdcml.kraps.compatibility.tuple
+package com.hxdcml.ark.compatibility.tuple
 
-import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.toPair
-import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component1
-import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component2
+import com.hxdcml.ark.compatibility.tuple.KPair.Hook.toPair
+import com.hxdcml.ark.compatibility.tuple.KPair.Hook.component1
+import com.hxdcml.ark.compatibility.tuple.KPair.Hook.component2
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
 import org.junit.Before
 import org.junit.Test
 import scala.Tuple2
-
 
 /**
  * Author: Soul
