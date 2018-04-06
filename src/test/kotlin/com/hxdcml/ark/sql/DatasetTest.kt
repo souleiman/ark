@@ -9,15 +9,15 @@ import com.hxdcml.ark.objects.Field
 import com.hxdcml.ark.objects.Fields
 import com.hxdcml.ark.objects.NestField
 import com.hxdcml.ark.objects.Parent
-import com.hxdcml.ark.sql.Dataset.map
 import com.hxdcml.ark.sql.Dataset.flatMap
-import com.hxdcml.ark.sql.Dataset.smartAs
 import com.hxdcml.ark.sql.Dataset.groupByKey
+import com.hxdcml.ark.sql.Dataset.map
 import com.hxdcml.ark.sql.Dataset.mapPartitions
+import com.hxdcml.ark.sql.Dataset.smartAs
 import org.amshove.kluent.shouldContainAll
+import org.amshove.kluent.shouldEqual
 import org.apache.spark.sql.Encoders
 import org.junit.Test
-import org.amshove.kluent.shouldEqual
 
 /**
  * Author: Soul
