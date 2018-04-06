@@ -34,7 +34,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val df = spark.createDataset(text, Encoders.STRING())
 
         val result = df.map(Encoders.INT()) { it.length }
-                .collectAsList()
+            .collectAsList()
 
         result shouldEqual expected
     }
@@ -50,7 +50,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val df = spark.createDataset(text, Encoders.STRING())
 
         val result = df.map(Encoders.STRING(), transform)
-                .collectAsList()
+            .collectAsList()
 
         result shouldEqual expected
     }
@@ -64,7 +64,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
 
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.map(body = transform)
-                .collectAsList()
+            .collectAsList()
 
         result shouldEqual expected
     }
@@ -78,7 +78,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val expected = text.map(transform)
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.map(body = transform)
-                .collectAsList()
+            .collectAsList()
 
         result shouldEqual expected
     }
@@ -95,7 +95,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val expected = text.map(transform)
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.map(body = transform)
-                .collectAsList()
+            .collectAsList()
 
         result shouldEqual expected
     }
@@ -107,8 +107,8 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val expected = text.map { "$it" }
 
         val result = spark.createDataset(text, Encoders.INT())
-                .smartAs(Encoders.STRING())
-                .collectAsList()
+            .smartAs(Encoders.STRING())
+            .collectAsList()
         result shouldEqual expected
     }
 
@@ -118,11 +118,11 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val text = listOf("This", "Is", "A", "String")
 
         val df = spark.createDataset(text, Encoders.STRING())
-                .map { Child(it) }
+            .map { Child(it) }
         val result = df.smartAs<Child, Parent>()
-                .select("child", "parent")
+            .select("child", "parent")
         val expected = spark.createDataset(text.map { KPair(it, "P") }, Encoders.tuple(Encoders.STRING(), Encoders.STRING()))
-                .toDF("child", "parent")
+            .toDF("child", "parent")
 
         assertDatasetEquals(expected, result)
     }
@@ -135,7 +135,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
 
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.flatMap(body = body)
-                .collectAsList()
+            .collectAsList()
 
         val expected = text.flatMap(body)
 
@@ -161,15 +161,15 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val text = listOf("A", "AA", "AAA", "BA", "BB", "CA", "AC", "CC")
 
         val expected = text.groupingBy { Field(0, it.first().toString()) }
-                .eachCount()
-                .entries
-                .map { (field, count) -> KPair(field, count.toLong()) }
+            .eachCount()
+            .entries
+            .map { (field, count) -> KPair(field, count.toLong()) }
 
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.groupByKey { Field(0, it.first().toString()) }
-                .count()
-                .collectAsList()
-                .map { (field, count) -> KPair(field, count as Long) }
+            .count()
+            .collectAsList()
+            .map { (field, count) -> KPair(field, count as Long) }
 
         result shouldContainAll expected
     }

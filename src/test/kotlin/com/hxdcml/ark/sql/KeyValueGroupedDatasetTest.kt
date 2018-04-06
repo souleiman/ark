@@ -2,12 +2,11 @@ package com.hxdcml.ark.sql
 
 import com.holdenkarau.spark.testing.JavaDatasetSuiteBase
 import com.hxdcml.ark.objects.Field
+import com.hxdcml.ark.sql.Dataset.groupByKey
+import com.hxdcml.ark.sql.KeyValueGroupedDataset.flatMapGroups
 import org.amshove.kluent.shouldContainAll
 import org.apache.spark.sql.Encoders
 import org.junit.Test
-
-import com.hxdcml.ark.sql.Dataset.groupByKey
-import com.hxdcml.ark.sql.KeyValueGroupedDataset.flatMapGroups
 
 /**
  * Author: Soul
@@ -21,14 +20,14 @@ class KeyValueGroupedDatasetTest : JavaDatasetSuiteBase() {
 
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.groupByKey { Field(0, it.first().toString()) }
-                .flatMapGroups(Encoders.STRING()) { _, values ->
-                    val combine = values.asSequence()
-                            .flatMap { it.map { it.toString() }.asSequence() }
-                            .distinct()
-                            .joinToString("")
+            .flatMapGroups(Encoders.STRING()) { _, values ->
+                val combine = values.asSequence()
+                    .flatMap { it.map { it.toString() }.asSequence() }
+                    .distinct()
+                    .joinToString("")
 
-                    listOf(combine)
-                }.collectAsList()
+                listOf(combine)
+            }.collectAsList()
 
         result shouldContainAll setOf("CAX", "BA", "AC")
     }
@@ -40,14 +39,14 @@ class KeyValueGroupedDatasetTest : JavaDatasetSuiteBase() {
 
         val df = spark.createDataset(text, Encoders.STRING())
         val result = df.groupByKey { Field(0, it.first().toString()) }
-                .flatMapGroups { _, values ->
-                    val combine = values.asSequence()
-                            .flatMap { it.map { it.toString() }.asSequence() }
-                            .distinct()
-                            .joinToString("")
+            .flatMapGroups { _, values ->
+                val combine = values.asSequence()
+                    .flatMap { it.map { it.toString() }.asSequence() }
+                    .distinct()
+                    .joinToString("")
 
-                    listOf(Field(value = combine))
-                }.collectAsList()
+                listOf(Field(value = combine))
+            }.collectAsList()
 
         result shouldContainAll setOf(Field(value = "CAX"), Field(value = "BA"), Field(value = "AC"))
     }
