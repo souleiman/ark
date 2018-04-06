@@ -1,4 +1,4 @@
-package com.hxdcml.kraps.objects
+package com.hxdcml.ark.objects
 
 import java.io.Serializable
 

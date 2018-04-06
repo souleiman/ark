@@ -1,4 +1,4 @@
-package com.hxdcml.kraps.sql
+package com.hxdcml.ark.sql
 
 import org.apache.spark.sql.Dataset
 import org.apache.spark.sql.Encoder
@@ -16,29 +16,29 @@ object Dataset {
     }
 
     inline fun <T, reified R> Dataset<T>.map(
-            encoder: Encoder<R> = Encoders.bean(R::class.java),
-            crossinline body: (T) -> R
+        encoder: Encoder<R> = Encoders.bean(R::class.java),
+        crossinline body: (T) -> R
     ): Dataset<R> {
         return this.map({ body(it) }, encoder)
     }
 
     inline fun <T, reified R> Dataset<T>.flatMap(
-            encoder: Encoder<R> = Encoders.bean(R::class.java),
-            crossinline body: (T) -> Iterable<R>
+        encoder: Encoder<R> = Encoders.bean(R::class.java),
+        crossinline body: (T) -> Iterable<R>
     ): Dataset<R> {
         return this.flatMap({ body(it).iterator() }, encoder)
     }
 
     inline fun <T, reified R> Dataset<T>.groupByKey(
-            encoder: Encoder<R> = Encoders.bean(R::class.java),
-            crossinline body: (T) -> R
+        encoder: Encoder<R> = Encoders.bean(R::class.java),
+        crossinline body: (T) -> R
     ): KeyValueGroupedDataset<R, T> {
         return this.groupByKey({ body(it) }, encoder)
     }
 
     inline fun <T, reified R> Dataset<T>.mapPartitions(
-            encoder: Encoder<R> = Encoders.bean(R::class.java),
-            crossinline body: (Iterator<T>) -> Iterable<R>
+        encoder: Encoder<R> = Encoders.bean(R::class.java),
+        crossinline body: (Iterator<T>) -> Iterable<R>
     ): Dataset<R> {
         return this.mapPartitions({ body(it).iterator() }, encoder)
     }

@@ -1,13 +1,13 @@
-package com.hxdcml.kraps.sql
+package com.hxdcml.ark.sql
 
 import com.holdenkarau.spark.testing.JavaDatasetSuiteBase
-import com.hxdcml.kraps.objects.Field
+import com.hxdcml.ark.objects.Field
 import org.amshove.kluent.shouldContainAll
 import org.apache.spark.sql.Encoders
 import org.junit.Test
 
-import com.hxdcml.kraps.sql.Dataset.groupByKey
-import com.hxdcml.kraps.sql.KeyValueGroupedDataset.flatMapGroups
+import com.hxdcml.ark.sql.Dataset.groupByKey
+import com.hxdcml.ark.sql.KeyValueGroupedDataset.flatMapGroups
 
 /**
  * Author: Soul

@@ -1,15 +1,19 @@
-package com.hxdcml.kraps.sql
+package com.hxdcml.ark.sql
 
 import com.holdenkarau.spark.testing.JavaDatasetSuiteBase
-import com.hxdcml.kraps.compatibility.tuple.KPair
-import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component1
-import com.hxdcml.kraps.compatibility.tuple.KPair.Hook.component2
-import com.hxdcml.kraps.objects.*
-import com.hxdcml.kraps.sql.Dataset.map
-import com.hxdcml.kraps.sql.Dataset.flatMap
-import com.hxdcml.kraps.sql.Dataset.smartAs
-import com.hxdcml.kraps.sql.Dataset.groupByKey
-import com.hxdcml.kraps.sql.Dataset.mapPartitions
+import com.hxdcml.ark.compatibility.tuple.KPair
+import com.hxdcml.ark.compatibility.tuple.KPair.Hook.component1
+import com.hxdcml.ark.compatibility.tuple.KPair.Hook.component2
+import com.hxdcml.ark.objects.Child
+import com.hxdcml.ark.objects.Field
+import com.hxdcml.ark.objects.Fields
+import com.hxdcml.ark.objects.NestField
+import com.hxdcml.ark.objects.Parent
+import com.hxdcml.ark.sql.Dataset.map
+import com.hxdcml.ark.sql.Dataset.flatMap
+import com.hxdcml.ark.sql.Dataset.smartAs
+import com.hxdcml.ark.sql.Dataset.groupByKey
+import com.hxdcml.ark.sql.Dataset.mapPartitions
 import org.amshove.kluent.shouldContainAll
 import org.apache.spark.sql.Encoders
 import org.junit.Test
@@ -165,7 +169,7 @@ class DatasetTest : JavaDatasetSuiteBase() {
         val result = df.groupByKey { Field(0, it.first().toString()) }
                 .count()
                 .collectAsList()
-                .map { (field, count) -> KPair(field, count as Long)}
+                .map { (field, count) -> KPair(field, count as Long) }
 
         result shouldContainAll expected
     }
